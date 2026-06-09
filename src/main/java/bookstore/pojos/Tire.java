@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Tire extends VehiclePart{
     private int diameter;
+    private String isbn;
 
     public Tire() {
     }
@@ -68,5 +69,9 @@ public class Tire extends VehiclePart{
     @Override
     public void sellItem() {
         System.out.println("Selling a Tire");
+    }
+
+    public String getIsbn() {
+        return isbn;
     }
 }

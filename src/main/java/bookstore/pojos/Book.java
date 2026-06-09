@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Book extends Publication {
     private String author = "";
+    private String isbn;
 
     public Book() {
         super();
@@ -69,5 +70,9 @@ public class Book extends Publication {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), author);
+    }
+
+    public String getIsbn() {
+        return isbn;
     }
 }

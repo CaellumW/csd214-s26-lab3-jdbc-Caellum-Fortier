@@ -59,4 +59,45 @@ class AppTest {
         assertNotNull(result);
         assertEquals("Dune Messiah", ((Book)result).getTitle());
     }
+
+    @Test
+    void testAppFlow_AddCustomNiche() {
+        StringBuilder script = new StringBuilder();
+
+        // --- ADD POLISH ---
+        script.append("1\n");             // Main Menu: Add Items
+        script.append("5\n");             // Add Menu: Add Polish
+        script.append("Nyx\n");
+        script.append("5\n");             // Price
+        script.append("5\n");             // Stock
+        script.append("Red\n");           // Colour
+        script.append("Matte\n");         // Finish
+
+        script.append("99\n");            // Exit Add Menu
+
+        // --- QUIT ---
+
+//        script.append("5\n");            // Quit
+//        script.append("6\n");
+//        script.append("99\n");            // Quit
+        script.append("99\n");            // Quit
+        // 2. Inject
+        System.setIn(new ByteArrayInputStream(script.toString().getBytes()));
+
+        // 3. Run
+        App app = new App() {
+            @Override
+            public void populate() { /* clean start */ }
+        };
+        app.run();
+
+        // 4. Verify
+        GelPolish expected = new GelPolish("Red", "Matte", "Nyx", 5.0, 5);
+        IO.println(expected);
+        SaleableItem result = app.findItem(expected);
+        IO.println(result);
+
+        assertNotNull(result);
+        assertEquals("Red", ((GelPolish)result).getColourShade());
+    }
 }
